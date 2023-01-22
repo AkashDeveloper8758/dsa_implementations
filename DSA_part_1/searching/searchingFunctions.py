@@ -19,7 +19,8 @@ def searchInSortedRotatedArray(A : list, l : int, h : int, key : int):
             else:
                 h = m-1
     return -1
-            
+# A[] = {5, 6, 7, 8, 9, 10, 1, 2, 3}
+
 #  time complexity : O(n)
 def findingPeakEle(arr):
     n = len(arr)

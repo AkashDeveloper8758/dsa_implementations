@@ -93,7 +93,7 @@ def bfsTopological(adj,indegree,visited):
                     indegree[u] -= 1
                     if indegree[u]==0:
                         q.append(u)
-        return count
+    return count
 
 
 def topologicalSortTraversal(adj,v):
@@ -104,13 +104,15 @@ def topologicalSortTraversal(adj,v):
             indegree[j]+=1
     print(indegree)
     c = bfsTopological(adj,indegree,visited)
+    # if there is a cycle, then some of node's indegres will remains more than 0, and will
+    # be not couted, and c will always be less then v, in that case.
     if c != v:
         print('cyclic')
     else:
         print('acyclic')
 
-#* ------------ topological sort using DFS
-#* add the dependent nodes first then add the parent at last
+    #* ------------ topological sort using DFS
+    #* add the dependent nodes first then add the parent at last
 
 def dfsTopological(adj,st,visited,s):
     visited[s] = True
@@ -166,7 +168,7 @@ def DFSbridge(s,adj,res,visited,low,dist,parent):
             if low[c] > dist[s]:
                 res.append([s,c])
         elif c != parent[s]:
-            # check if child is not parent, then get the min
+            # check if child is not parent, then there is a mininum distance possible from distance of child.
             low[s] = min(low[s],dist[c])
 
 def findBridges(adj,v):

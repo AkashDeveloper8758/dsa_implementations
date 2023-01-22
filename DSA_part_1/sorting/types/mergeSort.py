@@ -39,7 +39,7 @@ def mergeFunc(arr,low,mid,high):
     return res
 
 # space : O(1) time : O(nlogn)
-def mergeArrayUsingShellSort(arr,low,mid,high):
+def mergeArrayUsingShellSort(arr,low,high):
     gap = high-low+1
     gap = gap//2
     while gap > 0:
@@ -50,6 +50,7 @@ def mergeArrayUsingShellSort(arr,low,mid,high):
                 arr[i],arr[j] = arr[j],arr[i]
             i+=1
         gap = gap//2    
+
 
 # space O(1) time : O(n)  ** most efficient ** 
 def mergeArrayUsingMod(arr,low,mid,high):
@@ -68,6 +69,7 @@ def mergeArrayUsingMod(arr,low,mid,high):
             arr[k] += e2*N
             j+=1
             k+=1
+
     while i <= mid:
         el = arr[i] % N
         arr[k] += el*N

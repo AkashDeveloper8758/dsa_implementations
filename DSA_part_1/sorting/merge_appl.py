@@ -1,6 +1,3 @@
-from operator import countOf
-
-
 def mergeTwoSortedArray(arr1,arr2):
     i,j = 0,0
     l1,l2 = len(arr1),len(arr2)
