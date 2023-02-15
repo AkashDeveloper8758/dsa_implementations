@@ -78,8 +78,13 @@ def rabinKarpAlgorithm(string,pattern):
             if j==m:
                 pArr.append(i)
         if i < n-m:
-            # subtract the previous letter hash and add next one
-            currentHash = (d*(currentHash - ord(string[i])*h) + ord(string[i+m]))%q
+        # subtract the previous letter hash and add next one
+        # Calculate hash value for next window of text: Remove
+        # leading digit, add trailing digit
+        # How will you compute the value of the next window “345”? You will do (234 – 2*100)*10 + 5 and get 345.
+
+            currentHash = ((currentHash - ord(string[i]) * h) * d + ord(string[i+m])) %q
+
         if currentHash<0:
             currentHash +=  q
     return pArr

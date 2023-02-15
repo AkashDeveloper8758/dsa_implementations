@@ -1,27 +1,28 @@
-from numpy import array
+def computeLPSArray(pat, M, lps):
+    len = 0  # length of the previous longest prefix suffix
+ 
+    lps[0] = 0 # lps[0] is always 0
+    i = 1
+ 
+    # the loop calculates lps[i] for i = 1 to M-1
+    while i < M:
+        if pat[i] == pat[len]:
+            len += 1
+            lps[i] = len
+            i += 1
+        else:
+            # This is tricky. Consider the example.
+            # AAACAAAA and i = 7. The idea is similar
+            # to search step.
+            if len != 0:
+                len = lps[len-1]
+ 
+                # Also, note that we do not increment i here
+            else:
+                lps[i] = 0
+                i += 1
 
-
-def kmpPatternSearchingNaive(string,n):
-    for len in range(n-1,-1,-1):
-        flag = True
-        for i in range(len):
-            if string[i] != string[n-len+i]:
-                flag = False
-                break
-        if flag:
-            return len
-    return 0
-    
-
-def fillLps(string,lpsarr):
-    for i in range(len(string)):
-        lpsarr.append(kmpPatternSearchingNaive(string,i+1))
-    print('lps array : ',lpsarr)
-
-fillLps('ababaabba',[])
-
-# n = 4
-# len = 3
-# i = 1
-# string[i] = string[1]
-# string[n-len-i] = string(4-3-1) = string[0]
+string = 'AAAAABAAABA'
+lps= [0] * len(string)
+computeLPSArray(string,len(string),lps)
+print(lps)

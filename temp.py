@@ -1,51 +1,36 @@
 class Solution:
-    def findTopologicalOrder(self,adjs,visited,stack,s):
-        visited[s] = True
-        for v in adjs[s]:
-            if not visited[v]:
-                self.findTopologicalOrder(adjs,visited,stack,v)
-        stack.append(s)
+    
+    #Function to find the smallest window in the string s consisting
+    #of all the characters of string p.
+    def smallestWindow(self, s, p):
+        if len(p) > len(s):
+            return -1
+            
+        hashmap = {}
+        for i in range(len(p)):
+            if p[i] in hashmap:
+                hashmap[p[i]] +=1
+            else:
+                hashmap[p[i]] =1
+        resmap = {i: 0 for i in s}
+        dist= len(hashmap)
+        count,start = 0,0
+        res = -1
+        for i in range(len(s)):
+            resmap[s[i]] +=1
+            if s[i] in hashmap and hashmap[s[i]] == resmap[s[i]]:
+                count +=1
+            if count == dist:
+                while s[start] not in hashmap or resmap[s[start]] > hashmap[s[start]]:
+                    resmap[s[start]] -=1 
+                    start+=1
+                if res == -1 or len(res) > i-start + 1:
+                    res = s[start:i+1]
+        return res
 
-
-    def findOrder(self,dict, N, K):
-        graph = [[] for _ in range(K)]
-
-        for i in range(1,N):
-            item= dict[i-1]
-            sec = dict[i]
-            m = min(len(item),len(sec))
-            l = 0
-            while l < m and item[l] == sec[l]:
-                l+=1
-            if l < m and item[l] != sec[l]:
-                p = ord(item[l]) - ord('a')
-                c = ord(sec[l]) - ord('a')
-                graph[p].append(c)
-
-        res = []
-        visited = [False]*K
-        for item in graph:
-            print(item)
-            print('')
-        for item in range(K):
-            if not visited[item]:
-                self.findTopologicalOrder(graph,visited,res,item)
-        res.reverse()
-        strv = ''
-        for r in res:
-            strv += chr(ord("a") +r) 
-        return strv
-
-        
-
-# mylist =["baa","abcd","abca","cab","cad"]
-# mylist =["caa","aaa","aab"]
-mylist =["bhhb", "blkbggfecalifjfcbkjdicehhgikkdhlachlgbhji" ,"cfjjhcifladadbgcleggjgbcieihabcglblflgajgkejccj",
- "dlgdhiha", "ehggedljjhfldcajeceaeehkalkfeidhigkifjl", "gdalgkblahcldahledfghjb",
-  "geldbblaaflegjhlfjlgblfbdc", "ibjceciedbiilkjliijgklcgliaeeic", "jcebjkfgfibfckfiikklecihik",
-  "jdkcabjjjckgdblkljf", "jijlbjbliigkffhkchkclkhafbiiiblcglhfjkflbjjkih", "kfd", "lhdgidialgabfklffahiihceflebfidl"]
 
 
 sol = Solution()
-response = sol.findOrder(mylist,len(mylist),12)
-print('res: ',response)
+s = 'zoomlazapzo'
+p = 'ozza'
+print('res : ',sol.smallestWindow(s,p))

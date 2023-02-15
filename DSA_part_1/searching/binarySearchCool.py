@@ -1,5 +1,8 @@
-from collections import deque,defaultdict
+
+
 from typing import List
+
+# 2528. Maximize the Minimum Powered City : https://leetcode.com/contest/biweekly-contest-95/problems/maximize-the-minimum-powered-city/
 class Solution:
     def isGood(self,stations,r,k,power):
         n= len(stations)
@@ -32,11 +35,3 @@ class Solution:
             else:
                 high = m-1
         return ans
-                
-
-
-
-sol = Solution()
-arr = [4,4,4,4]
-res = sol.maxPower(arr,0,3)
-print('res : ',res)
